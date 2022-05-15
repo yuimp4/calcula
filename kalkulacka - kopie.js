@@ -101,8 +101,7 @@ function rovnaSe () {
                 pocitame = true;
             }
             else if (pocitame) {
-                
-                //vysledek *= cisilka[i + 1];
+                cisilka[i] *= cisilka[i+1];
                 document.getElementById('disp').innerHTML = vysledek;
                 console.log(cisilka + "\t#######\t" + pocitej + "\t#######\t" + "nasobeni\t" + vysledek);
                 pocitame = true;
@@ -122,7 +121,6 @@ function rovnaSe () {
                 }
                 else if (pocitame ) {
                     cisilka[i] /= cisilka[i+1];
-                    //vysledek /= cisilka[i + 1];
                     document.getElementById('disp').innerHTML = vysledek;
                     console.log(cisilka + "\t#######\t" + pocitej + "\t#######\t" + "deleni\t" + vysledek);
                     nasdel = true;
