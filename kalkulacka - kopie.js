@@ -10,6 +10,7 @@ var bylonadruhou = false;
 var pocitame = false;
 var nepis = false;
 var vysledek2 = 0;
+var konecJeCislo = false;
 
 function vymaz () {
     toCislo = 0;
@@ -35,6 +36,7 @@ function cislo(a) {
             pocet++;
             document.getElementById("disp").innerHTML = mezera + toCislo ;
             znaky = true;
+            konecJeCislo = true;
         }
             else if (pocet < 15 && znaky == false) {
                 toCislo = 0;
@@ -42,8 +44,10 @@ function cislo(a) {
                 pocet++;
                 document.getElementById("disp").innerHTML = mezera + toCislo ;
                 znaky = true;
+                konecJeCislo = true;
             }
     }
+
 }
 
 function znak(a) {
@@ -83,85 +87,90 @@ function znak(a) {
                     }
                 }
             console.log(cisilka + "\t#######\t" + pocitej);
+            konecJeCislo = false;
+            pocet = 0;
     }
 }
 
 
 
 function rovnaSe () {
+    if (konecJeCislo) {
     cisilka.push(toCislo);
     console.log(cisilka + "\t#######\t" + pocitej);
     
-    for (let i = 0; i < pocitej.length; i++) {
-        if (pocitej[i] == '×') {
-            if (!pocitame ){
-                vysledek += cisilka[i]*cisilka[i + 1];
-                document.getElementById('disp').innerHTML = vysledek;
-                console.log(cisilka + "\t#######\t" + pocitej + "\t#######\t" + "nasobeni\t" + vysledek);
-                pocitame = true;
-            }
-            else if (pocitame) {
-                cisilka[i] *= cisilka[i+1];
-                document.getElementById('disp').innerHTML = vysledek;
-                console.log(cisilka + "\t#######\t" + pocitej + "\t#######\t" + "nasobeni\t" + vysledek);
-                pocitame = true;
-                nasdel = true;
-            }
-        }
-    }
+        for (let i = 0; i < pocitej.length; i++) {
+            if (pocitej[i] == '×') {
+                if (!pocitame ){
+                    vysledek += cisilka[i]*cisilka[i + 1];
+                    document.getElementById('disp').innerHTML = vysledek;
+                    console.log(cisilka + "\t#######\t" + pocitej + "\t#######\t" + "nasobeni\t" + vysledek);
+                    pocitame = true;
+                }
+                else if (pocitame) {
 
-    for (let i = 0; i < pocitej.length; i++) { 
-            if (pocitej[i] == '/') {
-                if (!pocitame ) {
-                    vysledek += cisilka[i] / cisilka[i +1];
+                    //vysledek *= cisilka[i + 1];
                     document.getElementById('disp').innerHTML = vysledek;
+                    console.log(cisilka + "\t#######\t" + pocitej + "\t#######\t" + "nasobeni\t" + vysledek);
                     pocitame = true;
                     nasdel = true;
-                    console.log(cisilka + "\t#######\t" + pocitej + "\t#######\t" + "deleni\t" + vysledek);
-                }
-                else if (pocitame ) {
-                    cisilka[i] /= cisilka[i+1];
-                    document.getElementById('disp').innerHTML = vysledek;
-                    console.log(cisilka + "\t#######\t" + pocitej + "\t#######\t" + "deleni\t" + vysledek);
-                    nasdel = true;
-                    pocitame = true;
                 }
             }
         }
-    for (let i = 0; i < pocitej.length; i++) {
-        if (pocitej[i] == '+') {
-            if (!pocitame){
-                vysledek += cisilka[i] + cisilka[i +1];
-                document.getElementById('disp').innerHTML = vysledek;
-                console.log(cisilka + "\t#######\t" + pocitej + "\t#######\t" + "scitani\t" + vysledek);
-                pocitame = true;
+
+        for (let i = 0; i < pocitej.length; i++) { 
+                if (pocitej[i] == '/') {
+                    if (!pocitame ) {
+                        vysledek += cisilka[i] / cisilka[i +1];
+                        document.getElementById('disp').innerHTML = vysledek;
+                        pocitame = true;
+                        nasdel = true;
+                        console.log(cisilka + "\t#######\t" + pocitej + "\t#######\t" + "deleni\t" + vysledek);
+                    }
+                    else if (pocitame ) {
+                        cisilka[i] /= cisilka[i+1];
+                        //vysledek /= cisilka[i + 1];
+                        document.getElementById('disp').innerHTML = vysledek;
+                        console.log(cisilka + "\t#######\t" + pocitej + "\t#######\t" + "deleni\t" + vysledek);
+                        nasdel = true;
+                        pocitame = true;
+                    }
+                }
             }
-                else {
-                    vysledek += cisilka[i +1];
+        for (let i = 0; i < pocitej.length; i++) {
+            if (pocitej[i] == '+') {
+                if (!pocitame){
+                    vysledek += cisilka[i] + cisilka[i +1];
                     document.getElementById('disp').innerHTML = vysledek;
                     console.log(cisilka + "\t#######\t" + pocitej + "\t#######\t" + "scitani\t" + vysledek);
                     pocitame = true;
                 }
+                    else {
+                        vysledek += cisilka[i +1];
+                        document.getElementById('disp').innerHTML = vysledek;
+                        console.log(cisilka + "\t#######\t" + pocitej + "\t#######\t" + "scitani\t" + vysledek);
+                        pocitame = true;
+                    }
+                }
+            }
+        for (let i = 0; i < pocitej.length; i++) {
+            if (pocitej[i] == '-') {
+                if (!pocitame) {
+                    vysledek += cisilka[i] - cisilka[i + 1];
+                    document.getElementById('disp').innerHTML = vysledek;
+                    console.log(cisilka + "\t#######\t" + pocitej + "\t#######\t" + "odecitani\t" + vysledek);
+                    pocitame = true;
+                }
+                else {
+                    vysledek -= cisilka[i + 1];
+                    document.getElementById('disp').innerHTML = vysledek;
+                    console.log(cisilka + "\t#######\t" + pocitej + "\t#######\t" + "odecitani\t" + vysledek);
+                    pocitame = true;
+                }
+                
             }
         }
-    for (let i = 0; i < pocitej.length; i++) {
-        if (pocitej[i] == '-') {
-            if (!pocitame) {
-                vysledek += cisilka[i] - cisilka[i + 1];
-                document.getElementById('disp').innerHTML = vysledek;
-                console.log(cisilka + "\t#######\t" + pocitej + "\t#######\t" + "odecitani\t" + vysledek);
-                pocitame = true;
-            }
-            else {
-                vysledek -= cisilka[i + 1];
-                document.getElementById('disp').innerHTML = vysledek;
-                console.log(cisilka + "\t#######\t" + pocitej + "\t#######\t" + "odecitani\t" + vysledek);
-                pocitame = true;
-            }
-            
-        }
-    }
-
+    
     nepis = true;
     pocitame = false;
     toCislo = 0;
@@ -170,6 +179,7 @@ function rovnaSe () {
     mezera = "";
     vysledek = 0;
     znaky = false;
+    }
 }
 
 
