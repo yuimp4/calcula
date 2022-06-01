@@ -122,6 +122,7 @@ function rovnaSe () {
                 if (pocitej[i] == '/') {
                     if (!pocitame ) {
                         vysledek += cisilka[i] / cisilka[i +1];
+                        cisilka.splice(i + 1, 1);
                         document.getElementById('disp').innerHTML = vysledek;
                         pocitame = true;
                         nasdel = true;
